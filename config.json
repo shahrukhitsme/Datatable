@@ -1,0 +1,20 @@
+{
+    "selectedColumns": [
+        "name",
+        "capital",
+        "region",
+        "subregion",
+        "population"
+    ],
+    "sortableColumns": [
+        "capital",
+        "region",
+        "population"
+    ],
+    "filterableColumns": [
+        "capital",
+        "region"
+    ],
+    "isHeaderFixed": true,
+    "isPaginated": true
+}

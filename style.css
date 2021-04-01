@@ -1,0 +1,133 @@
+:root {
+    --main-color: rgb(47, 11, 116);
+  }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+body {
+    font-family: 'Noto Sans HK', sans-serif;
+    min-width: fit-content;
+}
+
+.nav {
+    position: relative;
+    width: 100%;
+    background: var(--main-color);
+    color: #fff;
+    height: 100px;
+}
+
+#content {
+    position: relative;
+    margin-top: 50px;
+}
+
+#content .container {
+}
+
+.container {
+    padding: 20px;
+    font-size: 20px;
+    height: 100%;
+}
+
+table {
+  text-align: left;
+  position: relative;
+  border-collapse: collapse; 
+  margin: auto;
+  width: 90%;
+  table-layout:fixed;
+}
+
+th, td {
+  padding: 0.25rem;
+}
+
+#header-row th {
+  background: var(--main-color);
+  color: white;
+}
+
+th {
+  background: white;
+  position: sticky;
+  top: 0;
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+}
+
+#buttons {
+    display: flex;
+    justify-content: center;
+    margin: 30px auto;
+}
+
+#buttons * {
+    margin: 10px;
+}
+
+.btn {
+    padding:.75rem;
+    border: none;
+    background: var(--main-color);
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: opacity 0.2s ease-in;
+    min-width: 150px;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+.page-btn {
+    border: none;
+    background: #fff;
+    font-size: 1.2rem;
+    padding: .5rem;
+    cursor: pointer;
+    width: 50px;
+}
+
+.active {
+    border: 1px solid rgb(43, 43, 43);
+    background: rgb(230, 230, 230);
+    width: 50px;
+}
+
+.page-btn:hover{
+    opacity: 0.8;
+    color: var(--main-color);
+    border: 1px solid rgb(116, 116, 116);
+    background: rgb(248, 248, 248);
+}
+
+.fas {
+    margin-left: 20px;
+}
+
+.clickable {
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+}
+
+.clickable:hover {
+    opacity: 0.8;
+}
+
+.clickable:active {
+    transform: scale(0.95);
+}
+
+.filterInput {
+    width: 60%;
+    padding:5px;
+    border-radius: 0;
+    border: 1px solid #333;
+}

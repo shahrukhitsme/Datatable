@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@100;300;400;500&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c1fd77a88f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mobile.css">
+    <title>Datatable</title>
+</head>
+
+<body onload="init()">
+    <header class="nav">
+        <div class="container">
+            <h1>Zeta Task</h1>
+        </div>
+    </header>
+
+    <section id="content">
+        <div class="container">
+            <table id="data-table">
+                <thead>
+                    <tr id="header-row">
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="filterInput" name="" placeholder="Search" onkeyup="filter(event)">
+                        </td>
+                        <td><input type="text" class="filterInput" name="" placeholder="Search" onkeyup="filter(event)">
+                        </td>
+                        <td><input type="text" class="filterInput" name="" placeholder="Search" onkeyup="filter(event)">
+                        </td>
+                        <td><input type="text" class="filterInput" name="" placeholder="Search" onkeyup="filter(event)">
+                        </td>
+                        <td><input type="text" class="filterInput" name="" placeholder="Search" onkeyup="filter(event)">
+                        </td>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <div class="container">
+
+        <div id="buttons">
+            <input type="button" value="Previous" class="btn" id="prev" onclick="changePage(event)">
+            <input type="button" value="1" class="page-btn active" id="page1" onclick="changePage(event)">
+            <input type="button" value="2" class="page-btn" id="page2" onclick="changePage(event)">
+            <input type="button" value="3" class="page-btn" id="page3" onclick="changePage(event)">
+            <input type="button" value="4" class="page-btn" id="page4" onclick="changePage(event)">
+            <input type="button" value="5" class="page-btn" id="page5" onclick="changePage(event)">
+            <input type="button" value="Next" class="btn" id="next" onclick="changePage(event)">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
