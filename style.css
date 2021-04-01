@@ -26,9 +26,6 @@ body {
     position: relative;
 }
 
-#content .container {
-}
-
 .container {
     padding: 20px;
     font-size: 20px;
@@ -183,4 +180,8 @@ th {
     border: none;
     text-decoration: none;
     border-bottom: 1px solid #fff;
+}
+
+.sortedColumn {
+    color: red;
 }
