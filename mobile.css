@@ -1,6 +1,85 @@
-@media(max-width:500px) {
+@media(max-width:1500px) {
+    
+}
+
+@media(max-width:1200px) {
+    
+}
+
+@media(max-width:900px) {
+    
+}
+
+@media(max-width:1000px) {
+    #content .container {
+        padding: 0px !important;
+    }
+
+    #content {
+        margin-top: 0px;
+    }
+
+    #header-row{
+        display: none;
+    }
+
+    th, td, tr {
+        display: block;
+    }
+
+    tr {
+        margin: 20px 0px;
+        border: 1px solid var(--main-color);
+    }
+
+
+    thead tr td {
+        background: #fff !important;
+    }
+
+    td{
+        text-align: right;
+    }
+
+    td::before{
+        content: attr(column-header);
+        text-align: left;
+        position: absolute;
+        left: 0px;
+        margin-left: 5px;
+        font-weight: bold;
+        color: var(--main-color);
+    }
+
+    .filterInput {
+        width: 50%;
+        height: 25px;
+    }
+    
     .container {
         padding: 30px;
         font-size: 15px;
+    }
+    
+    #buttons * {
+        margin: 4px;
+    }
+    
+    .btn {
+        padding:.25rem;
+        font-size: 1rem;
+        min-width: 0px;
+    }
+    
+    .page-btn {
+        width: fit-content;
+    }
+    
+    .active {
+        width: fit-content;
+    }
+
+    .sortDiv {
+        display: block;
     }
 }

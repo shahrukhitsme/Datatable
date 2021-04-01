@@ -27,15 +27,27 @@
                     <tr id="header-row">
                     </tr>
                     <tr>
-                        <td><input type="text" class="filterInput" name="" placeholder="Search" onkeyup="filter(event)">
+                        <td class="sortDiv">
+                            <div id="sortTitle">Sort By</div>
+                            <select name="column-dropdown" id="column-dropdown" onchange="sortByColumn()">
+                            </select>
+                            <select name="sortOrder-dropdown" id="sortOrder-dropdown" onchange="sortByColumn()">
+                                <option value="ASCENDING">ASCENDING</option>
+                                <option value="DESCENDING">DESCENDING</option>
+                            </select>
                         </td>
-                        <td><input type="text" class="filterInput" name="" placeholder="Search" onkeyup="filter(event)">
+                        </tr>
+                        <tr>
+                            <td class="invisibleFilter"><input type="text" class="filterInput" name="" placeholder="Search"
+                                    onkeyup="filter(event)">
                         </td>
-                        <td><input type="text" class="filterInput" name="" placeholder="Search" onkeyup="filter(event)">
+                        <td class="invisibleFilter"><input type="text" class="filterInput" name="" placeholder="Search" onkeyup="filter(event)">
                         </td>
-                        <td><input type="text" class="filterInput" name="" placeholder="Search" onkeyup="filter(event)">
+                        <td class="invisibleFilter"><input type="text" class="filterInput" name="" placeholder="Search" onkeyup="filter(event)">
                         </td>
-                        <td><input type="text" class="filterInput" name="" placeholder="Search" onkeyup="filter(event)">
+                        <td class="invisibleFilter"><input type="text" class="filterInput" name="" placeholder="Search" onkeyup="filter(event)">
+                        </td>
+                        <td class="invisibleFilter"><input type="text" class="filterInput" name="" placeholder="Search" onkeyup="filter(event)">
                         </td>
                     </tr>
                 </thead>

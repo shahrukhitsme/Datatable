@@ -125,9 +125,40 @@ th {
     transform: scale(0.95);
 }
 
-.filterInput {
+.filters {
     width: 60%;
     padding:5px;
     border-radius: 0;
     border: 1px solid #333;
+}
+
+.filterInput {
+    padding: 5px;
+}
+
+.invisibleFilter {
+    padding: 0;
+}
+
+#sortTitle{
+    display: inline;
+    float: left;
+    
+}
+
+#sortTitle {
+    margin-top: 3px;
+}
+
+.sortDiv select {
+    padding: 5px;
+    color: var(--main-color);
+}
+
+.invisible-cell {
+    padding: 0px;
+}
+
+.sortDiv {
+    display: none;
 }
