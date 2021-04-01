@@ -18,6 +18,7 @@ async function loadData() {
     removeIrrelevantData(data);
     initTable(config);
     fillTable();
+    sortByColumn();
     initButtons();
 }
 
@@ -111,8 +112,8 @@ function initButtons() {
             nextButton.style.display = '';
         else
             nextButton.style.display = 'none';
-
         clearActiveButton();
+        document.getElementById("content").style.minHeight = "600px";
 
         if (totalPages >= 5) {
             if (currentPage > 2 && currentPage <= totalPages - 2) {
@@ -159,6 +160,11 @@ function initButtons() {
             }
         }
         else {
+            page1Button.value = 1;
+            page2Button.value = 2;
+            page3Button.value = 3;
+            page4Button.value = 4;
+            page5Button.value = 5;
             document.getElementById("page" + currentPage).classList.add('active');
         }
     }
@@ -190,6 +196,7 @@ function headerFixInit(config) {
 function applySortableColumns() {
     config = window.config;
     let sortableColumns = config["sortableColumns"];
+    let dropdown = document.getElementById("column-dropdown");
     for (let index in sortableColumns) {
         let column = sortableColumns[index];
         let columnHeader = document.getElementById(column.toUpperCase());
@@ -197,8 +204,17 @@ function applySortableColumns() {
             columnHeader.appendChild(createElem("i", "fas fa-sort", null, null, null));
             columnHeader.classList.add("clickable");
             columnHeader.addEventListener("click", () => sortData(column));
+            let newOption = createElem("option", null, null, column, column.toUpperCase());
+            dropdown.appendChild(newOption);
         }
     }
+}
+
+function sortByColumn() {
+    let dropdown = document.getElementById("sortOrder-dropdown");
+    let order = dropdown.options[dropdown.selectedIndex].value;
+    dropdown = document.getElementById("column-dropdown");
+    sortData(dropdown.options[dropdown.selectedIndex].value, order == "ASCENDING");
 }
 
 function applyFilters() {
@@ -208,17 +224,25 @@ function applyFilters() {
         let column = filterableColumns[index];
         let filterInput = document.getElementById(column + "Filter");
         filterInput.style.display = '';
+        filterInput.parentElement.setAttribute("column-header", column.toUpperCase());
+        filterInput.parentElement.classList.remove('invisibleFilter');
     }
 }
 
-function sortData(column) {
-    let columnHeader = document.getElementById(column.toUpperCase());
-    let isAscending = columnHeader.getAttribute("sorted-ascending");
-    if (isAscending == "true")
-        isAscending = true;
-    else
-        isAscending = false;
-    columnHeader.setAttribute("sorted-ascending", !isAscending);
+function sortData(column, sortOrder) {
+    let isAscending = true;
+    if (sortOrder)
+        isAscending = sortOrder
+    else {
+        var columnHeader = document.getElementById(column.toUpperCase());
+        isAscending = columnHeader.getAttribute("sorted-ascending");
+        if (isAscending == "true")
+            isAscending = true;
+        else
+            isAscending = false;
+    }
+    if (columnHeader)
+        columnHeader.setAttribute("sorted-ascending", !isAscending);
     window.data.sort(sortByProperty(column, !isAscending));
     fillTable();
 }
@@ -226,9 +250,9 @@ function sortData(column) {
 function sortByProperty(property, asc) {
     return function (a, b) {
         if (a[property] > b[property])
-            return asc ? 1 : -1;
-        else if (a[property] < b[property])
             return asc ? -1 : 1;
+        else if (a[property] < b[property])
+            return asc ? 1 : -1;
 
         return 0;
     }
@@ -237,7 +261,6 @@ function sortByProperty(property, asc) {
 function fillTable() {
     data = window.data;
     config = window.config;
-    console.log(data.length);
     addRows(currentPage);
 }
 
@@ -253,20 +276,23 @@ function addRows(pageNum) {
             let column = selectedColumns[columnIndex];
             rowData.push(data[index][column]);
         }
-        addRow(rowData);
+        addRow(rowData, selectedColumns);
         if (config["isPaginated"] && index >= initialIndex + 9)
             break;
     }
 }
 
-function addRow(rowData) {
+function addRow(rowData, columns) {
     let newRow = createElem("tr", null, null, null, null);
-    for (let index in rowData)
-        newRow.appendChild(createElem("td", null, null, null, rowData[index]));
+    for (let index in rowData) {
+        let columnHeader = rowData[index] ? columns[index].toUpperCase() : '';
+        let className = rowData[index] ? null : "invisible-cell"
+        newRow.appendChild(createElem("td", className, null, null, rowData[index], { "key": "column-header", "value": columnHeader }));
+    }
     document.getElementById("table-body").appendChild(newRow);
 }
 
-function createElem(elemName, className, id, value, innerText) {
+function createElem(elemName, className, id, value, innerText, custom) {
     let elem = document.createElement(elemName);
     if (className)
         elem.setAttribute("class", className);
@@ -276,6 +302,8 @@ function createElem(elemName, className, id, value, innerText) {
         elem.setAttribute("value", value);
     if (innerText)
         elem.innerText = innerText;
+    if (custom)
+        elem.setAttribute(custom.key, custom.value);
     return elem;
 }
 
@@ -316,6 +344,7 @@ function filter(e) {
         }
     }
     window.data = filteredData;
+    currentPage = 1;
     fillTable();
     initButtons();
 }
