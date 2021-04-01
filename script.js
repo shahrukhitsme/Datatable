@@ -8,7 +8,7 @@ function init() {
 }
 
 async function loadData() {
-    let readDataPromise = await fetch("data.json");
+    let readDataPromise = await fetch("https://restcountries.eu/rest/v2/all");
     let readConfigPromise = await fetch("config.json");
     let data = await readDataPromise.json();
     let config = await readConfigPromise.json();
@@ -210,7 +210,11 @@ function applySortableColumns() {
         if (columnHeader) {
             columnHeader.appendChild(createElem("i", "fas fa-sort", null, null, null));
             columnHeader.classList.add("clickable");
-            columnHeader.addEventListener("click", () => sortData(column));
+            columnHeader.addEventListener("click", () => {
+                Object.values(document.getElementsByTagName("i")).map(elem => elem.classList.remove('sortedColumn'));
+                columnHeader.getElementsByTagName("i")[0].classList.add('sortedColumn');
+                sortData(column);
+            });
             let newOption = createElem("option", null, null, column, column.toUpperCase());
             dropdown.appendChild(newOption);
         }
@@ -304,7 +308,9 @@ function addRows(pageNum) {
     else
         lastItem = index + 1;
     let message;
-    if (lastItem == 1)
+    if (totalItems == 0)
+        message = '';
+    else if (lastItem == 1)
         message = `Showing ${lastItem} of ${totalItems} entry`;
     else
         message = `Showing ${initItem} to ${lastItem} of ${totalItems} entries`;
