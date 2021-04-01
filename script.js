@@ -112,8 +112,8 @@ function initButtons() {
             nextButton.style.display = '';
         else
             nextButton.style.display = 'none';
-
         clearActiveButton();
+        document.getElementById("content").style.minHeight = "600px";
 
         if (totalPages >= 5) {
             if (currentPage > 2 && currentPage <= totalPages - 2) {
@@ -160,6 +160,11 @@ function initButtons() {
             }
         }
         else {
+            page1Button.value = 1;
+            page2Button.value = 2;
+            page3Button.value = 3;
+            page4Button.value = 4;
+            page5Button.value = 5;
             document.getElementById("page" + currentPage).classList.add('active');
         }
     }
@@ -256,7 +261,6 @@ function sortByProperty(property, asc) {
 function fillTable() {
     data = window.data;
     config = window.config;
-    console.log(data.length);
     addRows(currentPage);
 }
 
@@ -340,6 +344,7 @@ function filter(e) {
         }
     }
     window.data = filteredData;
+    currentPage = 1;
     fillTable();
     initButtons();
 }
