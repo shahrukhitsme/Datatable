@@ -83,14 +83,20 @@ function initButtons() {
     let page4Button = document.getElementById("page4");
     let page5Button = document.getElementById("page5");
     let nextButton = document.getElementById("next");
-    prevButton.style.display = 'none'
-    page1Button.style.display = 'none'
-    page2Button.style.display = 'none'
-    page3Button.style.display = 'none'
-    page4Button.style.display = 'none'
-    page5Button.style.display = 'none'
-    nextButton.style.display = 'none'
+    let tableLengthControllerDiv = document.getElementById("tableLengthControllerDiv");
+    let tableLengthInfo = document.getElementById("itemsMessage");
+    tableLengthControllerDiv.style.display = 'none';
+    tableLengthInfo.style.display = 'none';
+    prevButton.style.display = 'none';
+    page1Button.style.display = 'none';
+    page2Button.style.display = 'none';
+    page3Button.style.display = 'none';
+    page4Button.style.display = 'none';
+    page5Button.style.display = 'none';
+    nextButton.style.display = 'none';
     if (config["isPaginated"]) {
+        tableLengthControllerDiv.style.display = '';
+        tableLengthInfo.style.display = '';
         buttonSection.style.display = '';
         if (currentPage > 1)
             prevButton.style.display = '';
