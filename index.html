@@ -19,6 +19,21 @@
             <h1>Zeta Task</h1>
         </div>
     </header>
+    
+    <div class="container">
+        <div id="tableLengthController">
+            Show <select name="entryCount" id="entryCount" onchange="updateTable()">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">40</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="250">250</option>
+            </select> entries
+        </div>
+    </div>
 
     <section id="content">
         <div class="container">
@@ -58,7 +73,7 @@
     </section>
 
     <div class="container">
-
+        <p id="itemsMessage"></p>
         <div id="buttons">
             <input type="button" value="Previous" class="btn" id="prev" onclick="changePage(event)">
             <input type="button" value="1" class="page-btn active" id="page1" onclick="changePage(event)">
