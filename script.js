@@ -1,6 +1,7 @@
 //let fs = require("fs");
 //let data = [];
 let currentPage = 1;
+let numOfEntries = 10;
 
 function init() {
     loadData();
@@ -96,7 +97,7 @@ function initButtons() {
         else
             prevButton.style.display = 'none';
 
-        let totalPages = Math.ceil(data.length / 10);
+        let totalPages = Math.ceil(data.length / numOfEntries);
         if (totalPages >= 1)
             page1Button.style.display = '';
         if (totalPages >= 2)
@@ -217,6 +218,15 @@ function sortByColumn() {
     sortData(dropdown.options[dropdown.selectedIndex].value, order == "ASCENDING");
 }
 
+function updateTable() {
+    let dropdown = document.getElementById("entryCount");
+    numOfEntries = parseInt(dropdown.options[dropdown.selectedIndex].value);
+    currentPage = 1;
+    fillTable();
+    sortByColumn();
+    initButtons();
+}
+
 function applyFilters() {
     config = window.config;
     let filterableColumns = config["filterableColumns"];
@@ -268,18 +278,31 @@ function addRows(pageNum) {
     data = window.data;
     config = window.config;
     document.getElementById("table-body").innerHTML = "";
-    let initialIndex = (pageNum - 1) * 10;
+    let initialIndex = (pageNum - 1) * numOfEntries;
     let selectedColumns = config["selectedColumns"];
-    for (let index = initialIndex; index < data.length; index++) {
+    for (var index = initialIndex; index < data.length; index++) {
         let rowData = [];
         for (let columnIndex in selectedColumns) {
             let column = selectedColumns[columnIndex];
             rowData.push(data[index][column]);
         }
         addRow(rowData, selectedColumns);
-        if (config["isPaginated"] && index >= initialIndex + 9)
+        if (config["isPaginated"] && index >= initialIndex + numOfEntries - 1)
             break;
     }
+    let totalItems = data.length;
+    let initItem = initialIndex + 1;
+    let lastItem;
+    if (index == data.length)
+        lastItem = index;
+    else
+        lastItem = index + 1;
+    let message;
+    if (lastItem == 1)
+        message = `Showing ${lastItem} of ${totalItems} entry`;
+    else
+        message = `Showing ${initItem} to ${lastItem} of ${totalItems} entries`;
+    document.getElementById("itemsMessage").innerText = message;
 }
 
 function addRow(rowData, columns) {
